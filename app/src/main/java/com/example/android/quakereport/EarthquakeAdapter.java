@@ -8,7 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Davo on 2/23/2017.
@@ -71,7 +73,10 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView dateView = (TextView) listItemView.findViewById(R.id.date);
         // Get the image resource ID from the current Earthquake object and
         // set the image to iconView
-        dateView.setText(currentEarthquake.getDate().toString());
+        Date dateObject = new Date(currentEarthquake.getTiumeInMilliseconds());
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
+        String dateToDisplay = dateFormatter.format(dateObject);
+        dateView.setText(dateToDisplay);
 
         // Return the whole list item layout (containing 3 TextViews)
         // so that it can be shown in the ListView
