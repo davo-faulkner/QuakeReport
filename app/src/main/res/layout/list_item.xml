@@ -17,6 +17,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:id="@+id/location_offset"
+        tools:text="50km NW of"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:id="@+id/city"
         tools:text="San Fransisco"/>
 
