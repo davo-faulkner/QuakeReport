@@ -27,4 +27,11 @@
         android:id="@+id/date"
         tools:text="Feb 2, 2016"/>
 
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/time"
+        tools:text="4:30 PM"/>
+
 </LinearLayout>

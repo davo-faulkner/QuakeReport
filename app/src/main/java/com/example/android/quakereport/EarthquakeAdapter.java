@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -74,13 +76,26 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // Get the image resource ID from the current Earthquake object and
         // set the image to iconView
         Date dateObject = new Date(currentEarthquake.getTiumeInMilliseconds());
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
-        String dateToDisplay = dateFormatter.format(dateObject);
+        String dateToDisplay = formatDate(dateObject);
         dateView.setText(dateToDisplay);
+
+        TextView timeView = (TextView) listItemView.findViewById(R.id.time);
+        String timeToDisplay = formatTime(dateObject);
+        timeView.setText(timeToDisplay);
 
         // Return the whole list item layout (containing 3 TextViews)
         // so that it can be shown in the ListView
         return listItemView;
+    }
+
+    private String formatDate(Date dateObject) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM DD, yyyy");
+        return dateFormat.format(dateObject);
+    }
+
+    private String formatTime(Date dateObject) {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        return timeFormat.format(dateObject);
     }
 
 }
