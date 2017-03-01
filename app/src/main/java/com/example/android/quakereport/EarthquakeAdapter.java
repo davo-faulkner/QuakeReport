@@ -69,8 +69,10 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView cityTextView = (TextView) listItemView.findViewById(R.id.city);
 
         String fullLocationString = currentEarthquake.getCity();
-        if(fullLocationString.contains(" of ")) {
-            ;
+        int ofIndex = fullLocationString.indexOf(" of ");
+        if(ofIndex > -1) {
+            offsetTextView.setText(fullLocationString.substring(0, ofIndex + 3));
+            cityTextView.setText(fullLocationString.substring(ofIndex + 4));
         } else {
             offsetTextView.setText("Near the");
             cityTextView.setText(currentEarthquake.getCity());
