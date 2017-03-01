@@ -65,11 +65,20 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // set this text on the name TextView
         magnitudeTextView.setText(currentEarthquake.getMagnitude().toString());
 
-        // Find the TextView in the list_item.xml layout with the ID city
+        TextView offsetTextView = (TextView) listItemView.findViewById(R.id.location_offset);
         TextView cityTextView = (TextView) listItemView.findViewById(R.id.city);
-        // Get the version number from the current Earthquake object and
-        // set this text on the number TextView
-        cityTextView.setText(currentEarthquake.getCity());
+
+        String fullLocationString = currentEarthquake.getCity();
+        if(fullLocationString.contains(" of ")) {
+            ;
+        } else {
+            offsetTextView.setText("Near the");
+            cityTextView.setText(currentEarthquake.getCity());
+        }
+        // Find the TextView in the list_item.xml layout with the ID city
+//        // Get the version number from the current Earthquake object and
+//        // set this text on the number TextView
+//        cityTextView.setText(currentEarthquake.getCity());
 
         // Find the ImageView in the list_item.xml layout with the ID date
         TextView dateView = (TextView) listItemView.findViewById(R.id.date);
