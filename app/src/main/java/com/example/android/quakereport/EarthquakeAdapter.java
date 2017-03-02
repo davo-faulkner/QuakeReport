@@ -1,6 +1,7 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,16 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // Get the version name from the current Earthquake object and
         // set this text on the name TextView
         magnitudeTextView.setText(magnitudeOutput);
+
+        // Set the proper background color on the magnitude circle.
+        // Fetch the background from the TextView, which is a GradientDrawable.
+        GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeTextView.getBackground();
+
+        // Get the appropriate background color based on the current earthquake magnitude
+        int magnitudeColor = getMagnitudeColor(currentEarthquake.getMagnitude());
+
+        // Set the color on the magnitude circle
+        magnitudeCircle.setColor(magnitudeColor);
 
         TextView offsetTextView = (TextView) listItemView.findViewById(R.id.location_offset);
         TextView cityTextView = (TextView) listItemView.findViewById(R.id.city);
