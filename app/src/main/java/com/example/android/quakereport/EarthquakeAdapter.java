@@ -81,7 +81,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         magnitudeCircle.setColor(magnitudeColor);
 
         TextView offsetTextView = (TextView) listItemView.findViewById(R.id.location_offset);
-        TextView cityTextView = (TextView) listItemView.findViewById(R.id.city);
+        TextView cityTextView = (TextView) listItemView.findViewById(R.id.primary_location);
 
         String fullLocationString = currentEarthquake.getCity();
         int ofIndex = fullLocationString.indexOf(" of ");
