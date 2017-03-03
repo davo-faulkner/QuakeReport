@@ -9,11 +9,13 @@ public class Earthquake {
     private Double mMagnitude;
     private String mCity;
     private Long mTiumeInMilliseconds;
+    private String mUrl;
 
-    public Earthquake(Double magnitude, String city, Long date) {
+    public Earthquake(Double magnitude, String city, Long date, String url) {
         mMagnitude = magnitude;
         mCity = city;
         mTiumeInMilliseconds = date;
+        mUrl = url;
     }
 
     public Double getMagnitude() {
@@ -25,4 +27,5 @@ public class Earthquake {
     public Long getTiumeInMilliseconds() {
         return mTiumeInMilliseconds;
     }
+    public String getUrl() { return mUrl; }
 }
