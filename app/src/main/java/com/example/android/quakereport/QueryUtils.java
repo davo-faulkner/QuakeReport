@@ -16,8 +16,6 @@ import static com.example.android.quakereport.EarthquakeActivity.LOG_TAG;
  * Helper methods related to requesting and receiving earthquake data from USGS.
  */
 public final class QueryUtils {
-
-    private static final String USGS_REQUEST_URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10";
     /**
      * Sample JSON response for a USGS query
      */
