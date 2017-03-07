@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,7 +30,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class EarthquakeActivity extends AppCompatActivity {
+public class EarthquakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Earthquake>{
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
     private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=5&limit=10";
@@ -70,6 +72,18 @@ public class EarthquakeActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+    @Override
+    public Loader<Earthquake> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+    @Override
+    public void onLoadFinished(Loader<Earthquake> loader, Earthquake data) {
+
+    }
+    @Override
+    public void onLoaderReset(Loader<Earthquake> loader) {
+
     }
     private class EarthquakeAsyncTask extends AsyncTask<String, Void, ArrayList<Earthquake>> {
 
