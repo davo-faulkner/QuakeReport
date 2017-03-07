@@ -50,8 +50,7 @@ public final class QueryUtils {
 
         // Create an empty ArrayList that we can start adding earthquakes to
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
-
-        earthquakes = fetchEarthquakeData(USGS_REQUEST_URL);
+        String earthquakesJsonString = fetchEarthquakeData(USGS_REQUEST_URL);
 
         // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
@@ -85,11 +84,11 @@ public final class QueryUtils {
         // Return the list of earthquakes
         return earthquakes;
     }
-    private static ArrayList<Earthquake> fetchEarthquakeData(String requestUrl) {
-        ArrayList<Earthquake> earthquakes = new ArrayList<>();
+    private static String fetchEarthquakeData(String requestUrl) {
+        String earthquakesJsonString = null;
         // Create URL object
         URL url = createUrl(requestUrl);
-        return earthquakes;
+        return earthquakesJsonString;
     }
     private static URL createUrl(String stringUrl) {
         URL url = null;
