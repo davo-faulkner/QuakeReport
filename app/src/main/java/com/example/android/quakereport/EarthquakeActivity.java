@@ -43,12 +43,10 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         setContentView(R.layout.earthquake_activity);
         // Get a reference to the LoaderManager, in order to interact with loaders.
         LoaderManager loaderManager = getLoaderManager();
-// Initialize the loader. Pass in the int ID constant defined above and pass in null for
+        // Initialize the loader. Pass in the int ID constant defined above and pass in null for
         // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
         // because this activity implements the LoaderCallbacks interface).
         loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
-//        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-//        task.execute(USGS_REQUEST_URL);
     }
     @Override
     public Loader<ArrayList<Earthquake>> onCreateLoader(int i, Bundle args) {
