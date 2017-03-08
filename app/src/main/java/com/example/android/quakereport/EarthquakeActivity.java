@@ -29,8 +29,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class EarthquakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Earthquake>{
+public class EarthquakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Earthquake>> {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
     private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=5&limit=10";
@@ -39,6 +40,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
+        getSupportLoaderManager().initLoader(0, null, this);
 
         EarthquakeAsyncTask task = new EarthquakeAsyncTask();
         task.execute(USGS_REQUEST_URL);
@@ -74,15 +76,15 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         }
     }
     @Override
-    public Loader<Earthquake> onCreateLoader(int id, Bundle args) {
-        return null;
+    public Loader<ArrayList<Earthquake>> onCreateLoader(int id, Bundle args) {
+        return new EarthquakeLoader(MainActivity.this);
     }
     @Override
-    public void onLoadFinished(Loader<Earthquake> loader, Earthquake data) {
+    public void onLoadFinished(Loader<ArrayList<Earthquake>> loader, ArrayList<Earthquake> data) {
 
     }
     @Override
-    public void onLoaderReset(Loader<Earthquake> loader) {
+    public void onLoaderReset(Loader<ArrayList<Earthquake>> loader) {
 
     }
     private class EarthquakeAsyncTask extends AsyncTask<String, Void, ArrayList<Earthquake>> {

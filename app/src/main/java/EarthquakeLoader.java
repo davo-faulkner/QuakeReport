@@ -10,13 +10,27 @@ import java.util.ArrayList;
  * Created by Davo on 3/7/2017.
  */
 
+/**
+ * Loads a list of earthquakes by using an AsyncTask to perform the
+ * network request to the given URL.
+ */
 public class EarthquakeLoader extends AsyncTaskLoader<ArrayList<Earthquake>> {
-    private static String USGS_REQUEST_URL = null;
 
+    /** Tag for log messages */
+    private static final String LOG_TAG = EarthquakeLoader.class.getName();
+
+    /** Query URL */
+    private String mUrl;
+
+    /**
+     * Constructs a new {@link EarthquakeLoader}.
+     *
+     * @param context of the activity
+     * @param url to load data from
+     */
     public EarthquakeLoader(Context context, String url) {
         super(context);
-        // TODO: Finish implementing this constructor
-        USGS_REQUEST_URL = url;
+        mUrl = url;
     }
 
     @Override
@@ -24,10 +38,17 @@ public class EarthquakeLoader extends AsyncTaskLoader<ArrayList<Earthquake>> {
         forceLoad();
     }
 
+    /**
+     * This is on a background thread.
+     */
     @Override
     public ArrayList<Earthquake> loadInBackground() {
-        // TODO: Implement this method
-        ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes(USGS_REQUEST_URL);
+        if (mUrl == null) {
+            return null;
+        }
+
+        // Perform the network request, parse the response, and extract a list of earthquakes.
+        ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes(mUrl);
         return earthquakes;
     }
 }
