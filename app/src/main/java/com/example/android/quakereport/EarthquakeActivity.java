@@ -20,30 +20,38 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+import android.app.LoaderManager;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Earthquake>> {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
     private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=5&limit=10";
+    /**
+     * Constant value for the earthquake loader ID. We can choose any integer.
+     * This really only comes into play if you're using multiple loaders.
+     */
+    private static final int EARTHQUAKE_LOADER_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
-        getSupportLoaderManager().initLoader(0, null, this);
-
-        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-        task.execute(USGS_REQUEST_URL);
+        // Get a reference to the LoaderManager, in order to interact with loaders.
+        LoaderManager loaderManager = getLoaderManager();
+// Initialize the loader. Pass in the int ID constant defined above and pass in null for
+        // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
+        // because this activity implements the LoaderCallbacks interface).
+        loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+//        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
+//        task.execute(USGS_REQUEST_URL);
     }
     private void updateUi(ArrayList<Earthquake> earthquakes){
         final ArrayList<Earthquake> earthquakesArrayList = earthquakes;
@@ -76,28 +84,28 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         }
     }
     @Override
-    public Loader<ArrayList<Earthquake>> onCreateLoader(int id, Bundle args) {
-        return new EarthquakeLoader(MainActivity.this);
+    public Loader<ArrayList<Earthquake>> onCreateLoader(int i, Bundle args) {
+        return new EarthquakeLoader(this, USGS_REQUEST_URL);
     }
     @Override
     public void onLoadFinished(Loader<ArrayList<Earthquake>> loader, ArrayList<Earthquake> data) {
-
+        updateUi(data);
     }
     @Override
     public void onLoaderReset(Loader<ArrayList<Earthquake>> loader) {
 
     }
-    private class EarthquakeAsyncTask extends AsyncTask<String, Void, ArrayList<Earthquake>> {
-
-        @Override
-        protected ArrayList<Earthquake> doInBackground(String... urls) {
-            ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes(urls[0]);
-            return earthquakes;
-        }
-        @Override
-        protected void onPostExecute(ArrayList<Earthquake> earthquakes) {
-            updateUi(earthquakes);
-        }
-    }
+//    private class EarthquakeAsyncTask extends AsyncTask<String, Void, ArrayList<Earthquake>> {
+//
+//        @Override
+//        protected ArrayList<Earthquake> doInBackground(String... urls) {
+//            ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes(urls[0]);
+//            return earthquakes;
+//        }
+//        @Override
+//        protected void onPostExecute(ArrayList<Earthquake> earthquakes) {
+//            updateUi(earthquakes);
+//        }
+//    }
 }
 

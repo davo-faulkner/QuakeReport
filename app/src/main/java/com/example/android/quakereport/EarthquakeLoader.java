@@ -1,8 +1,7 @@
+package com.example.android.quakereport;
+
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-
-import com.example.android.quakereport.Earthquake;
-import com.example.android.quakereport.QueryUtils;
 
 import java.util.ArrayList;
 
