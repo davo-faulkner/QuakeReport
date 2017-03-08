@@ -18,16 +18,14 @@ package com.example.android.quakereport;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.LoaderManager;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
 import java.util.ArrayList;
 
 public class EarthquakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Earthquake>> {
@@ -53,7 +51,15 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 //        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
 //        task.execute(USGS_REQUEST_URL);
     }
-    private void updateUi(ArrayList<Earthquake> earthquakes){
+    @Override
+    public Loader<ArrayList<Earthquake>> onCreateLoader(int i, Bundle args) {
+        return new EarthquakeLoader(this, USGS_REQUEST_URL);
+    }
+    @Override
+    public void onLoadFinished(Loader<ArrayList<Earthquake>> loader, ArrayList<Earthquake> data) {
+        updateUi(data);
+    }
+    private void updateUi(ArrayList<Earthquake> earthquakes) {
         final ArrayList<Earthquake> earthquakesArrayList = earthquakes;
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
@@ -75,7 +81,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
             }
         });
     }
-
     public void openWebPage(String url) {
         Uri webpage = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
@@ -84,28 +89,8 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         }
     }
     @Override
-    public Loader<ArrayList<Earthquake>> onCreateLoader(int i, Bundle args) {
-        return new EarthquakeLoader(this, USGS_REQUEST_URL);
-    }
-    @Override
-    public void onLoadFinished(Loader<ArrayList<Earthquake>> loader, ArrayList<Earthquake> data) {
-        updateUi(data);
-    }
-    @Override
     public void onLoaderReset(Loader<ArrayList<Earthquake>> loader) {
 
     }
-//    private class EarthquakeAsyncTask extends AsyncTask<String, Void, ArrayList<Earthquake>> {
-//
-//        @Override
-//        protected ArrayList<Earthquake> doInBackground(String... urls) {
-//            ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes(urls[0]);
-//            return earthquakes;
-//        }
-//        @Override
-//        protected void onPostExecute(ArrayList<Earthquake> earthquakes) {
-//            updateUi(earthquakes);
-//        }
-//    }
 }
 

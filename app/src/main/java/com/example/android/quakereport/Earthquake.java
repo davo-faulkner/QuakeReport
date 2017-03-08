@@ -27,5 +27,7 @@ public class Earthquake {
     public Long getTiumeInMilliseconds() {
         return mTiumeInMilliseconds;
     }
-    public String getUrl() { return mUrl; }
+    public String getUrl() {
+        return mUrl;
+    }
 }
