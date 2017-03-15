@@ -2,6 +2,8 @@ package com.example.android.quakereport;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -37,6 +39,7 @@ public class EarthquakeLoader extends AsyncTaskLoader<ArrayList<Earthquake>> {
 
     @Override
     protected void onStartLoading() {
+        Log.e(LOG_TAG, "onStartLoading called.");
         forceLoad();
     }
 
@@ -45,6 +48,7 @@ public class EarthquakeLoader extends AsyncTaskLoader<ArrayList<Earthquake>> {
      */
     @Override
     public ArrayList<Earthquake> loadInBackground() {
+        Log.e(LOG_TAG, "loadInBackground called.");
         if (mUrl == null) {
             return null;
         }

@@ -36,6 +36,7 @@ public final class QueryUtils {
      * parsing a JSON response.
      */
     public static ArrayList<Earthquake> extractEarthquakes(String requestUrl) {
+        Log.e(LOG_TAG, "extractEarthquakes called.");
 
         // Create an empty ArrayList that we can start adding earthquakes to
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
