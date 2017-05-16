@@ -89,7 +89,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
                 // Create a new intent to view the earthquake URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
-
+ 
                 // Send the intent to launch a new activity
                 startActivity(websiteIntent);
             }
